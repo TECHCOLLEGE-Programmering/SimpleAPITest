@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,16 +17,29 @@ namespace WpfApp1.DataProviders
     {
         async Task<IEnumerable<User>?> IUserDataProvider.GetAllAsync()
         {
-            //TODO get District from API and Add API as multi startup project
-            throw new NotImplementedException();
+            IEnumerable<User> users = null;
+
+            using (HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("https://localhost:7041/");
+                HttpResponseMessage response = await client.GetAsync("api/User");
+                if (response.IsSuccessStatusCode)
+                {
+                    return await response.Content.ReadFromJsonAsync<IEnumerable<User>>();
+
+                }
+                else
+                {
+                    Console.WriteLine("Internal server Error");
+                }
+            }
+            return null;
         }
     }
     internal class UserTestDataProvider : IUserDataProvider
     {
         async Task<IEnumerable<User>?> IUserDataProvider.GetAllAsync()
         {
-            await Task.Delay(10);
-
             return new List<User>() {
             new User {Id = 1,  Name = "Test1", Email = "Test1@TestCase.com"},
             new User {Id = 2,  Name = "Test2", Email = "Test2@TestCase.com"},
