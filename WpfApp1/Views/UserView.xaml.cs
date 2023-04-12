@@ -27,7 +27,7 @@ namespace WpfApp1.View
         public UserView()
         {
             InitializeComponent();
-            _viewModel = new UserViewModel(new APIUserDataProvider());
+            _viewModel = new UserViewModel(new ApiUserDataProvider());
             DataContext = _viewModel;
             Loaded += UsersView_Loaded;
         }

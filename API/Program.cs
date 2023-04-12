@@ -19,7 +19,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 #region Service Injected
-builder.Services.AddScoped(typeof(IUserRepository), typeof(TestUserRepository)); //TODO What is used for
+builder.Services.AddScoped<IUserRepository, TestUserRepository>();
 builder.Services.AddScoped<ICustomService<User>, UserService>();
 #endregion
 builder.Services.AddControllers();
@@ -45,7 +45,7 @@ app.MapControllers();
 app.Run();
 
 
-internal partial class Program
+internal static partial class Program
 {
 
 }
