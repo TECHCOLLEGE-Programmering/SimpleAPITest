@@ -20,8 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\" />
-    <Folder Include="ViewModels\" />
+    <ProjectReference Include="..\DomainModel\DomainModel.csproj" />
   </ItemGroup>
 
 </Project>

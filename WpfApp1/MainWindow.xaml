@@ -3,27 +3,38 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WpfApp1"
+        xmlns:local="clr-namespace:WpfApp1" 
+        xmlns:view="clr-namespace:WpfApp1.View"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" FontSize="20">
+        Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Button
-                x:Name="btnAddCutomer"
-                HorizontalAlignment="Left" 
-                VerticalAlignment="Top" 
-                Margin="10" 
-                Click="ButtonAddCustomer_Click">
-            <Button.Content>
-                <StackPanel Orientation="Horizontal">
-                    <!-- Images build action should be set to resource -->
-                    <Image Source="/Images/add.png" Height="18" Margin=" 0 0 5 0"/>
-                    <TextBlock Text="Add"/>
-                </StackPanel>
-            </Button.Content>
-        </Button>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
 
-        <ListView>
-            
-        </ListView>
+        <!-- Main menu -->
+        <Menu FontSize="20">
+            <MenuItem Header="_View">
+                <MenuItem Header="_Users"/>
+            </MenuItem>
+        </Menu>
+
+        <!-- Header -->
+        <Grid Grid.Row="1" Background="#F05A28">
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                <TextBlock Text="User App" FontSize="30" 
+                 Foreground="White" VerticalAlignment="Center"/>
+            </StackPanel>
+        </Grid>
+
+        <view:UserView Grid.Row="2" Loaded="UserView_Loaded"/>
+
+        <!-- Statusbar -->
+        <StatusBar Grid.Row="3">
+            <StatusBarItem FontSize="10" Content=" (c) Lærke B. Kristensen"/>
+        </StatusBar>
     </Grid>
 </Window>

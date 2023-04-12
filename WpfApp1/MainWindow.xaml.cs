@@ -12,12 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
-/*
- * Data binding 
- * Dependency injection
- * MVVM model
- */
+using WpfApp1.View;
 
 namespace WpfApp1
 {
@@ -30,10 +25,22 @@ namespace WpfApp1
         {
             InitializeComponent();
         }
-
-        private void ButtonAddCustomer_Click(object sender, RoutedEventArgs e)
+        private void ButtonMoveNavigation_Click(object sender, RoutedEventArgs e)
         {
-            btnAddCutomer.Content = "Customer added!";
+            //var column = (int)customerListGrid.GetValue(Grid.ColumnProperty);
+
+            //var newColumn = column == 0 ? 2 : 0;
+            //customerListGrid.SetValue(Grid.ColumnProperty, newColumn);
+
+            //var column = Grid.GetColumn(districtListGrid);
+
+            //var newColumn = column == 0 ? 2 : 0;
+            //Grid.SetColumn(districtListGrid, newColumn);
+        }
+
+        private void UserView_Loaded(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
