@@ -43,3 +43,9 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+
+internal partial class Program
+{
+
+}
