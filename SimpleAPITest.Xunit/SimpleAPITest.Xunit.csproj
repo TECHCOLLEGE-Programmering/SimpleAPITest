@@ -23,10 +23,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\API\API.csproj" />
     <ProjectReference Include="..\DomainModel\DomainModel.csproj" />
     <ProjectReference Include="..\Repository\Repository.csproj" />
     <ProjectReference Include="..\Services\Service.csproj" />
-    <ProjectReference Include="..\WebApplication1\API.csproj" />
   </ItemGroup>
 
 </Project>
