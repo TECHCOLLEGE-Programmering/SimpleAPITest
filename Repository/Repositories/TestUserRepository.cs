@@ -11,7 +11,7 @@ namespace Repository.Repositories
 {
     public class TestUserRepository : IUserRepository
     {
-        private static List<User> users = new List<User>() { 
+        public static List<User> users = new List<User>() { 
             new User {Id = 1,  Name = "Test1", Email = "Test1@TestCase.com"},
             new User {Id = 2,  Name = "Test2", Email = "Test2@TestCase.com"},
             new User {Id = 3,  Name = "Test3", Email = "Test3@TestCase.com"},

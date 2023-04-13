@@ -45,7 +45,7 @@ app.MapControllers();
 app.Run();
 
 
-internal static partial class Program
+internal partial class Program
 {
 
 }
