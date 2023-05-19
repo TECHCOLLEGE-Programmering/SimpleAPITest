@@ -20,9 +20,9 @@ namespace API.Controllers
         }
         // GET: api/<UserController>
         [HttpGet(Name = "GetUsers")]
-        public ActionResult< IEnumerable<User> > Get()
+        public ActionResult<IEnumerable<User>> Get([FromQuery] string? name, [FromQuery] string? email)
         {
-            var users = _service.GetAll();
+            var users = _service.GetAll(name, email);
             if (users == null)
                 return NotFound();
             return Ok(users);
@@ -30,7 +30,7 @@ namespace API.Controllers
 
         // GET api/<UserController>
         [HttpGet("{id}", Name = "GetUser")]
-        public ActionResult< User > Get(int id)
+        public ActionResult<User> Get(int id)
         {
             var user = _service.Get(id);
             if (user == null)
