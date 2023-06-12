@@ -45,5 +45,10 @@ namespace WpfApp1.View
         {
             _viewModel.Add();
         }
+
+        private void ButtonDelete_Click(object sender, RoutedEventArgs e)
+        {
+            _viewModel.Delete();
+        }
     }
 }

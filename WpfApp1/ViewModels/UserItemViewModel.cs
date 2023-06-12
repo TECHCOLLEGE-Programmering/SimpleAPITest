@@ -11,31 +11,31 @@ namespace WpfApp1.ViewModels
 {
     internal class UserItemViewModel : BaseViewModel
     {
-        private readonly User _model;
+        public readonly User model;
 
         public UserItemViewModel(User model)
         {
-            _model = model;
+            this.model = model;
         }
 
-        public int Id => _model.Id;
+        public int Id => model.Id;
 
         public string? Name
         {
-            get => _model.Name;
+            get => model.Name;
             set
             {
-                _model.Name = value;
+                model.Name = value;
                 RaisePropertyChanged();
             }
         }
 
         public string? Email
         {
-            get => _model.Email;
+            get => model.Email;
             set
             {
-                _model.Email = value;
+                model.Email = value;
                 RaisePropertyChanged();
             }
         }

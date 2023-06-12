@@ -61,6 +61,16 @@ namespace WpfApp1.ViewModels
                 }
             }
         }
+        internal void Delete()
+        {
+            if(_selectedUser != null)
+            {
+                var toBeDeleted = _selectedUser;
+                UsersObserver.Remove(toBeDeleted);
+                _userDataProvider.Delete(toBeDeleted.model);
+            }
+
+        }
         internal void Add()
         {
             throw new NotImplementedException();
