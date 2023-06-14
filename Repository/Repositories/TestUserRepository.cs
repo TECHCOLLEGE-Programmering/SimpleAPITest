@@ -48,8 +48,6 @@ namespace Repository.Repositories
                 .OrderBy(u => u.Email)
                 .ToList();
             }
-            else { 
-            }
             return users;
         }
         public User GetUser(int id)
