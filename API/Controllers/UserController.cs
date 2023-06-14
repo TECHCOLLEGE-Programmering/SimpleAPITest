@@ -45,12 +45,12 @@ namespace API.Controllers
             if (user == null)
                 return BadRequest();
 
-            User InsertedUser = _service.Insert(user);
+            User UpdatedUser = _service.Update(user);
 
-            if (InsertedUser == null)
+            if (UpdatedUser == null)
                 return BadRequest();
 
-            return Ok(InsertedUser);
+            return Ok(UpdatedUser);
         }
 
         // POST api/<UserController>
@@ -60,12 +60,12 @@ namespace API.Controllers
             if (user == null)
                 return BadRequest();
 
-            User UpdatedUser = _service.Update(user);
+            User InsertedUser = _service.Insert(user);
 
-            if (UpdatedUser == null)
+            if (InsertedUser == null)
                 return BadRequest();
 
-            return Ok(UpdatedUser);
+            return Ok(InsertedUser);
         }
 
         // DELETE api/<UserController>
