@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using DomainModel;
+using System.Net.Http;
 
 namespace SimpleAPITest.Xunit.IntegrationsTests
 {
@@ -6,6 +7,7 @@ namespace SimpleAPITest.Xunit.IntegrationsTests
     {
         private readonly WebApplicationFactory<Program> _factory;
         private readonly HttpClient _httpClient;
+        private readonly string endpoint = "/api/User";
         public UserControllerTest()
         {
             _factory = new WebApplicationFactory<Program>();
@@ -26,7 +28,7 @@ namespace SimpleAPITest.Xunit.IntegrationsTests
             var expectedContent = TestUserRepository.users;
             var stopwatch = Stopwatch.StartNew();
             //Act.
-            var response = await _httpClient.GetAsync("/api/User");
+            HttpResponseMessage response = await _httpClient.GetAsync(endpoint);
             //Assert.
             await TestHelpers.AssertResponseWithContentAsync(
                 stopwatch, response, expectedStatusCode, expectedContent);
@@ -41,7 +43,40 @@ namespace SimpleAPITest.Xunit.IntegrationsTests
 
             var stopwatch = Stopwatch.StartNew();
             //Act.
-            var response = await _httpClient.GetAsync("/api/User/2");
+            HttpResponseMessage response = await _httpClient.GetAsync($"{endpoint}/2");
+            //Assert.
+            await TestHelpers.AssertResponseWithContentAsync(
+                stopwatch, response, expectedStatusCode, expectedContent);
+        }
+        [Fact]
+        public async Task CreateTest()
+        {
+            //Arrange.
+            var expectedStatusCode = System.Net.HttpStatusCode.OK;
+            var expectedContent = new User() { Id = 5, Name = "CreateTest", Email = "createTest@email.com" };
+
+            var stopwatch = Stopwatch.StartNew();
+            //Act.
+            HttpContent httpContent = TestHelpers.GetJsonStringContent(expectedContent);
+            HttpResponseMessage response = await _httpClient.PostAsync(endpoint, httpContent);
+            //Assert.
+            await TestHelpers.AssertResponseWithContentAsync(
+                stopwatch, response, expectedStatusCode, expectedContent);
+        }
+        [Fact]
+        public async Task UpdateTest() // TODO: Returns BadRequest
+        {
+            //Arrange.
+            var expectedStatusCode = System.Net.HttpStatusCode.OK;
+            int indexOfExpectedContent = TestUserRepository.users.BinarySearch(new User { Id = 3 });
+            var expectedContent = TestUserRepository.users[indexOfExpectedContent];
+            expectedContent.Name = "UpdatedName";
+            expectedContent.Email = "UpdatedEmail@email.com";
+
+            var stopwatch = Stopwatch.StartNew();
+            //Act.
+            HttpContent httpContent = TestHelpers.GetJsonStringContent(expectedContent);
+            HttpResponseMessage response = await _httpClient.PutAsync(endpoint, httpContent);
             //Assert.
             await TestHelpers.AssertResponseWithContentAsync(
                 stopwatch, response, expectedStatusCode, expectedContent);
@@ -54,7 +89,7 @@ namespace SimpleAPITest.Xunit.IntegrationsTests
             var id = TestUserRepository.users;
             var stopwatch = Stopwatch.StartNew();
             //Act.
-            var response = await _httpClient.DeleteAsync("/api/User/1");
+            HttpResponseMessage response = await _httpClient.DeleteAsync($"{endpoint}/1");
             //Assert.
             TestHelpers.AssertCommonResponseParts(stopwatch, response, expectedStatusCode);
         }
