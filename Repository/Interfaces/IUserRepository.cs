@@ -10,6 +10,7 @@ namespace Repository.Interfaces
     public interface IUserRepository
     {
         public IEnumerable<User> GetUsers();
+        public IEnumerable<User> GetUsers(string? name, string? email);
         public User GetUser(int id);
         public User InsertUser(User user);
         public User UpdateUser(User user);

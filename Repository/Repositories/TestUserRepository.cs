@@ -21,6 +21,31 @@ namespace Repository.Repositories
         {
             return users;
         }
+        public IEnumerable<User> GetUsers(string? name, string? email)
+        {
+            if (string.IsNullOrEmpty(name) && string.IsNullOrEmpty(email))
+            {
+                return users
+                .Where(u => u.Name.ToLower().Contains(name.ToLower()) && u.Email.ToLower().Contains(email.ToLower()))
+                .OrderBy(u => u.Name)
+                .ToList();
+            }
+            else if (!string.IsNullOrEmpty(name))
+            {
+                return users
+                .Where(u => u.Name.ToLower().Contains(name.ToLower()))
+                .OrderBy(u => u.Name)
+                .ToList();
+            }
+            else if (!string.IsNullOrEmpty(email))
+            {
+                return users
+                .Where(u => u.Email.ToLower().Contains(email.ToLower()))
+                .OrderBy(u => u.Email)
+                .ToList();
+            }
+            return users;
+        }
         public User GetUser(int id)
         {
             return users.Single(x => x.Id == id);
@@ -51,5 +76,6 @@ namespace Repository.Repositories
             User ToBeDeleted = users.Single(x => x.Id == id);
             users.Remove(ToBeDeleted);
         }
+
     }
 }

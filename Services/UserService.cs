@@ -13,11 +13,11 @@ namespace Services
         {
             _userRepository = userRepository;
         }
-        public IEnumerable<User> GetAll()
+        public IEnumerable<User> GetAll(string? name, string? email)
         {
             try
             {
-                return _userRepository.GetUsers();
+                return _userRepository.GetUsers(name, email);
             }
             catch (Exception ex)
             {
