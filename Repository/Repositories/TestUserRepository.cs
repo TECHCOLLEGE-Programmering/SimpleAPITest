@@ -25,6 +25,10 @@ namespace Repository.Repositories
         {
             if (string.IsNullOrEmpty(name) && string.IsNullOrEmpty(email))
             {
+                return users;
+            }
+            else if (!string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(email))
+            {
                 return users
                 .Where(u => u.Name.ToLower().Contains(name.ToLower()) && u.Email.ToLower().Contains(email.ToLower()))
                 .OrderBy(u => u.Name)
@@ -43,6 +47,8 @@ namespace Repository.Repositories
                 .Where(u => u.Email.ToLower().Contains(email.ToLower()))
                 .OrderBy(u => u.Email)
                 .ToList();
+            }
+            else { 
             }
             return users;
         }
