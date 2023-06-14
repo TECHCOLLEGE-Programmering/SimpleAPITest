@@ -16,7 +16,6 @@ namespace WpfApp1.DataProviders
         Task<IEnumerable<User>?> GetAllAsync();
         Task<bool> Delete(User user);
         Task<bool> Add(User user);
-
     }
     internal class ApiUserDataProvider : IUserDataProvider
     {
@@ -65,10 +64,10 @@ namespace WpfApp1.DataProviders
         }
         public async Task<bool> Delete(User user)
         {
+            string url = $"{_endpointAdress}/{user.Id}";
             using (HttpClient client = new HttpClient())
             {
                 client.BaseAddress = _baseAdress;
-                string url = string.Format("{_endpointAdress}/{user.Id}");
                 Console.WriteLine(url);
                 HttpResponseMessage response = await client.DeleteAsync(url);
                 if (response.IsSuccessStatusCode)
